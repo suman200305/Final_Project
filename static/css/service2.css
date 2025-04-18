@@ -1,0 +1,184 @@
+/* ====== ANIMATED BACKGROUND ====== */
+.animated-bg {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #dcedc8, #b2ebf2, #8df169, #c8e6c9);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ====== SOIL CONTAINER ====== */
+.soil-container {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  animation: fadeInSlide 1s ease-out forwards;
+}
+
+/* ====== IMAGE PREVIEW ====== */
+.image-container {
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(46, 125, 50, 0.05);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.image-container h3 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.image-container img:hover {
+  transform: scale(1.02);
+}
+
+/* ====== PREDICTION OUTPUT ====== */
+.prediction-container {
+  margin-top: 30px;
+  display: grid;
+  gap: 25px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prediction,
+.soil-characteristics {
+  padding: 25px;
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.prediction:hover,
+.soil-characteristics:hover {
+  transform: translateY(-5px);
+}
+
+.prediction h2,
+.soil-characteristics h3 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid rgba(46, 125, 50, 0.2);
+  padding-bottom: 10px;
+}
+
+.soil-characteristics ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.soil-characteristics li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.soil-characteristics li:last-child {
+  border-bottom: none;
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+@media (max-width: 768px) {
+  .soil-container {
+    width: 95%;
+    padding: 25px;
+    margin: 20px auto;
+  }
+  
+  .prediction,
+  .soil-characteristics {
+    padding: 20px;
+  }
+  
+  .prediction h2,
+  .soil-characteristics h3 {
+    font-size: 1.3rem;
+  }
+  
+  .soil-characteristics li {
+    font-size: 1rem;
+  }
+}
+
+.form-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.form-container p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.predictor-form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-left: 71px;
+}
+
+.predictor-form label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.predictor-form input[type="file"] {
+  margin-bottom: 20px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.predictor-form button {
+  padding: 10px;
+  background-color: #00c853;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.predictor-form button:hover {
+  background-color: #009624;
+}

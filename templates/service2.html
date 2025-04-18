@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soil Type Classifier</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/service2.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="../static/logo.jpg" alt="Logo" />
+        <span>Smart.A</span>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Service</a></li>
+          <li><a href="#" class="button login-btn">Login</a></li>
+          <li><a href="#" class="button signup-btn">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Animated Background + Form Container -->
+  <div class="animated-bg">
+    <section class="soil-container">
+      <div class="form-container">
+        <h1>Soil Type Classifier</h1>
+        <p>Upload a soil image to predict its type using smart AI</p>
+        <form class="predictor-form" action="/templates/service2.html" method="POST" enctype="multipart/form-data">
+          <label for="soilImage">Choose Soil Image:</label>
+          <input type="file" name="soilImage" id="soilImage" accept="image/*" required onchange="previewImage(event)">
+          <button type="submit">Predict Soil Type</button>
+        </form>
+      </div>
+
+      <div class="image-container" id="imagePreviewContainer" >
+        <!-- Image preview will be shown here -->
+      </div>
+
+      {% if image_url %}
+      <div style="text-align:center; margin-top: 20px; ">
+        <h3>Uploaded Image:</h3>
+        <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 200px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+      </div>
+      {% endif %}
+
+      {% if prediction %}
+      <div class="prediction-container">
+        <div class="prediction">
+          <h2>Prediction Result</h2>
+          <table style="margin-left: 150px;">
+            <thead><tr><th>Predicted Soil Type</th></tr></thead>
+            <tbody><tr><td>{{ prediction }}</td></tr></tbody>
+          </table>
+        </div>
+        <div class="soil-characteristics">
+          <h3>Soil Characteristics:</h3>
+          <ul>
+            {% for point in soil_info %}
+              <li>{{ point }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2024 Smart.A. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+          <a href="https://twitter.com" target="_blank">Twitter</a> |
+          <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+          <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        const imageContainer = document.getElementById('imagePreviewContainer');
+        imageContainer.innerHTML = `<h3>Uploaded Image:</h3>
+                                    <img src="${e.target.result}" alt="Uploaded Image" 
+                                         style="max-width: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); margin-top: 15px;">`;
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+
+</body>
+</html>

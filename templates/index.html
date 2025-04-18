@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegetable Price Predictor</title>
+  <link rel="stylesheet" href="static\css\styles.css">
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <!-- Logo Section -->
+      <div class="logo">
+
+        <img src="static/logo.jpg" alt="Logo" />
+        <span>Smart.A</span>
+
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="/templates/service2.html">Service</a></li>
+          <li><a href="#" class="button login-btn" id="loginBtn">Login</a></li>
+          <li><a href="#" class="button signup-btn" id="signupBtn">Sign Up</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="static/feild.jpg" alt="Wheat Field">
+    <div class="hero-content">
+      <h1 class="hero-title">WELCOME TO SMART AGRICULTURE</h1>
+      <p class="hero-subtext">"With smart agriculture, we plant the seeds of innovation. Precision farming and
+        technology unite to minimize waste, increase yields, and create a harmonious future where nature and technology
+        thrive side by side."</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>
+          We are dedicated to revolutionizing agriculture with sustainable and innovative solutions. By blending
+          tradition with technology, we aim to empower farmers, nurture communities, and protect the environment for
+          future generations.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="static/fruits.jpg" alt="Fruits">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Services Section -->
+<section class="services">
+  <div class="services-content">
+    <h2>Our Services</h2>
+    <div class="service-container">
+      <!-- Service 1 -->
+      <a href="/predict" class="service" style="text-decoration: none;">
+        <img src="static/price-predict.jpg" alt="Price Prediction">
+        <h3>Price Prediction</h3>
+      </a>
+
+      <!-- Service 2 -->
+      <a href="/templates/service2.html" class="service" style="text-decoration: none;">
+        <img src="static/service2.jpeg" alt="Service 2">
+        <h3>Soil Prediction</h3>
+      </a>
+
+      <!-- Service 3 -->
+      <a href="service3.html" class="service"style="text-decoration: none;">
+        <img src="static/service3.jpeg" alt="Service 3">
+        <h3>Service 3</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+ <!-- Footer Section -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2024 Smart.A. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Login Popup -->
+<div class="popup" id="loginPopup">
+  <div class="popup-content">
+    <span class="close-btn" id="closeLogin">&times;</span>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+      <label for="loginEmail">Email:</label>
+      <input type="email" id="loginEmail" name="loginEmail" required>
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="loginPassword" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- SignUp Popup -->
+<div class="popup" id="signupPopup">
+  <div class="popup-content">
+    <span class="close-btn" id="closeSignup">&times;</span>
+    <h2>Sign Up</h2>
+    <form action="/signup" method="post">
+      <label for="signupEmail">Email:</label>
+      <input type="email" id="signupEmail" name="signupEmail" required>
+      <label for="signupPassword">Password:</label>
+      <input type="password" id="signupPassword" name="signupPassword" required>
+      <label for="signupConfirmPassword">Confirm Password:</label>
+      <input type="password" id="signupConfirmPassword" name="signupConfirmPassword" required>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+    </div>
+  </div>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <script src="static/js/script.js"></script>
+</body>
+
+</html>

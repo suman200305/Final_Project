@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegetable Price Predictor</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+ <!-- Header Section -->
+ <header>
+  <div class="container">
+    <!-- Logo Section -->
+    <div class="logo">
+
+      <img src="static/logo.jpg" alt="Logo" />
+      <span>Smart.A</span>
+
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="\">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#" class="button login-btn" id="loginBtn">Login</a></li>
+        <li><a href="#" class="button signup-btn" id="signupBtn">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>Vegetable Price Predictor</h1>
+    </div>
+  </section>
+
+  <!-- Prediction Section -->
+  <section id="pre" class="predictor">
+    <div class="container predictor-container">
+      <!-- Form Section -->
+      <div class="predictor-form">
+        <h2>Predict Prices</h2>
+        <script>
+          const stateDistrictMap = {
+            "Uttar Pradesh": ["Lucknow", "Agra", "Kanpur", "Varanasi"],
+            "Kerala": ["Alappuzha", "Kozhikode", "Kochi", "Thiruvananthapuram"],
+            "Gujarat": ["Ahmedabad", "Rajkot", "Surat", "Vadodara"],
+            "West Bengal": ["Darjeeling", "Midnapore", "Kolkata", "Howrah"],
+            "Rajasthan": ["Jaipur", "Ajmer", "Jodhpur", "Udaipur"],
+            "Karnataka": ["Bengaluru", "Mangalore", "Mysore", "Hubli"],
+            "Tamil Nadu": ["Salem", "Madurai", "Coimbatore", "Chennai"],
+            "Delhi": ["South Delhi", "East Delhi", "Central Delhi", "North Delhi"],
+            "Maharashtra": ["Nashik", "Pune", "Mumbai", "Nagpur"],
+            "Punjab": ["Jalandhar", "Ludhiana", "Patiala", "Amritsar"]
+          };
+      
+          function updateDistricts() {
+            const stateSelect = document.getElementById("state");
+            const districtSelect = document.getElementById("district");
+            const selectedState = stateSelect.value;
+      
+            // Clear existing options
+            districtSelect.innerHTML = "";
+      
+            // Add new options
+            if (stateDistrictMap[selectedState]) {
+              stateDistrictMap[selectedState].forEach(district => {
+                const option = document.createElement("option");
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+              });
+            }
+          }
+        </script>
+      </head>
+      <body>
+        <form action="/predict" method="post">
+          <label for="state">State:</label><br>
+          <select id="state" name="state" required onchange="updateDistricts()">
+            <option value="">--Select State--</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Punjab">Punjab</option>
+          </select><br><br>
+      
+          <label for="district">District:</label><br>
+          <select id="district" name="district" required>
+            <option value="">--Select District--</option>
+          </select><br><br>
+      
+          <label for="market">Market:</label><br>
+          <select id="market" name="market" required>
+            <option value="">--Select Market--</option>
+            <option value="City Market">City Market</option>
+            <option value="Main Market">Main Market</option>
+            <option value="Retail Market">Retail Market</option>
+            <option value="Wholesale Market">Wholesale Market</option>
+          </select><br><br>
+      
+          <label for="vegetable">Vegetable:</label><br>
+          <select id="vegetable" name="vegetable" required>
+            <option value="">--Select Vegetable--</option>
+            <option value="Beans">Beans</option>
+            <option value="Tomato">Tomato</option>
+            <option value="Carrot">Carrot</option>
+            <option value="Potato">Potato</option>
+            <option value="Brinjal">Brinjal</option>
+            <option value="Cabbage">Cabbage</option>
+            <option value="Onion">Onion</option>
+          </select><br><br>
+      
+          <label for="start_date">Start Date (YYYY-MM-DD):</label><br>
+          <input type="date" id="start_date" name="start_date" required><br><br>
+      
+          <button type="submit" class="predict-btn">Predict Prices</button>
+
+        </form>
+      </div>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if forecast_data %}
+      <!-- Table Section -->
+      <div class="prediction-table ">
+        <h2>Price Prediction Data</h2>
+        <table>
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Predicted Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for item in forecast_data %}
+                  <tr>
+                      <td>{{ item.date }}</td>
+                      <td>{{ item.predicted_price }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  {% endif %}
+      </div>
+    </div>
+  </section>
+
+
+ <!-- Footer Section -->
+ <footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2024 Smart.A. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://www.instagram.com" target="_blank">Instagram</a> |
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Login Popup -->
+<div class="popup" id="loginPopup">
+  <div class="popup-content">
+    <span class="close-btn" id="closeLogin">&times;</span>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+      <label for="loginEmail">Email:</label>
+      <input type="email" id="loginEmail" name="loginEmail" required>
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="loginPassword" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- SignUp Popup -->
+<div class="popup" id="signupPopup">
+  <div class="popup-content">
+    <span class="close-btn" id="closeSignup">&times;</span>
+    <h2>Sign Up</h2>
+    <form action="/signup" method="post">
+      <label for="signupEmail">Email:</label>
+      <input type="email" id="signupEmail" name="signupEmail" required>
+      <label for="signupPassword">Password:</label>
+      <input type="password" id="signupPassword" name="signupPassword" required>
+      <label for="signupConfirmPassword">Confirm Password:</label>
+      <input type="password" id="signupConfirmPassword" name="signupConfirmPassword" required>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
+  <script src="static/js/script.js"></script>
+  
+</body>
+</html>
